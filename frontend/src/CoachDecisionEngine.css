@@ -1,0 +1,2373 @@
+/* =========================================================
+   TFT COACH — COACH DECISION ENGINE
+   Professional dark dashboard
+   No excessive animation
+   ========================================================= */
+
+:root {
+  --coach-bg: #17191f;
+  --coach-panel: #1d2027;
+  --coach-panel-2: #20242c;
+  --coach-border: #30353f;
+
+  --coach-text: #f4f5f7;
+  --coach-text-2: #c7cbd3;
+  --coach-muted: #8e96a5;
+  --coach-dim: #687180;
+
+  --coach-gold: #d9ad55;
+  --coach-gold-soft: rgba(217, 173, 85, 0.12);
+
+  --coach-green: #59c78a;
+  --coach-green-soft: rgba(89, 199, 138, 0.10);
+
+  --coach-red: #e26b6b;
+  --coach-red-soft: rgba(226, 107, 107, 0.10);
+
+  --coach-blue: #78a8df;
+  --coach-blue-soft: rgba(120, 168, 223, 0.10);
+
+  --coach-radius: 10px;
+}
+
+/* =========================================================
+   GLOBAL FONT
+   ========================================================= */
+
+.coach-decision-engine,
+.coach-decision-engine *,
+.action-plan-panel,
+.action-plan-panel *,
+.coach-primary-decision,
+.coach-primary-decision *,
+.coach-decision-grid,
+.coach-decision-grid *,
+.coach-reasons,
+.coach-reasons *,
+.coach-warnings,
+.coach-warnings *,
+.coach-action-plan,
+.coach-action-plan * {
+  font-family:
+    Inter,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  box-sizing: border-box;
+}
+
+/* Prevent accidental text compression */
+.coach-decision-engine,
+.action-plan-panel {
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-rendering: optimizeLegibility;
+}
+
+/* =========================================================
+   MAIN ENGINE
+   ========================================================= */
+
+.coach-decision-engine {
+  width: 100%;
+  color: var(--coach-text);
+  background: transparent;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+/* =========================================================
+   ENGINE HEADER
+   ========================================================= */
+
+.coach-decision-engine-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  margin-bottom: 14px;
+}
+
+.coach-decision-engine-title {
+  min-width: 0;
+}
+
+.coach-decision-engine-title span {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: var(--coach-gold);
+
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1.2;
+
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.coach-decision-engine-title h3 {
+  margin: 0;
+
+  color: var(--coach-text);
+
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+/* =========================================================
+   STATUS BADGE
+   ========================================================= */
+
+.decision-engine-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  flex-shrink: 0;
+
+  padding: 6px 9px;
+
+  border: 1px solid #39414d;
+  border-radius: 999px;
+
+  background: #20242b;
+
+  color: var(--coach-text-2);
+
+  font-size: 10px;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+.decision-engine-dot {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: var(--coach-green);
+
+  box-shadow: 0 0 0 2px rgba(89, 199, 138, 0.10);
+}
+
+/* =========================================================
+   PRIMARY DECISION
+   ========================================================= */
+
+.coach-primary-decision {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  min-height: 82px;
+
+  padding: 15px 16px;
+
+  border: 1px solid var(--coach-border);
+  border-radius: var(--coach-radius);
+
+  background: #20242b;
+
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease;
+}
+
+.coach-primary-decision:hover {
+  border-color: #414854;
+}
+
+.coach-primary-decision.danger {
+  border-color: rgba(226, 107, 107, 0.42);
+  background: #241d20;
+}
+
+.coach-primary-decision.warning {
+  border-color: rgba(217, 173, 85, 0.40);
+  background: #242118;
+}
+
+.coach-primary-decision.positive {
+  border-color: rgba(89, 199, 138, 0.38);
+  background: #1d2521;
+}
+
+.coach-primary-icon {
+  width: 38px;
+  height: 38px;
+
+  flex: 0 0 38px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid #39414d;
+  border-radius: 9px;
+
+  background: #181b20;
+
+  color: var(--coach-gold);
+}
+
+.coach-primary-content {
+  min-width: 0;
+}
+
+.coach-primary-content > span {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: var(--coach-muted);
+
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1.2;
+
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+}
+
+.coach-primary-content > strong {
+  display: block;
+
+  color: var(--coach-text);
+
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.coach-primary-content > p {
+  margin: 4px 0 0;
+
+  color: var(--coach-muted);
+
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+/* =========================================================
+   DECISION GRID
+   ========================================================= */
+
+.coach-decision-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 8px;
+
+  margin-top: 9px;
+}
+
+.coach-decision-card {
+  min-width: 0;
+
+  min-height: 76px;
+
+  padding: 12px 13px;
+
+  border: 1px solid var(--coach-border);
+  border-radius: var(--coach-radius);
+
+  background: var(--coach-panel);
+
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    transform 140ms ease;
+}
+
+.coach-decision-card:hover {
+  border-color: #414854;
+  background: var(--coach-panel-2);
+  transform: translateY(-1px);
+}
+
+.coach-decision-card-header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-bottom: 6px;
+}
+
+.coach-decision-card-header svg {
+  width: 14px;
+  height: 14px;
+
+  color: var(--coach-gold);
+}
+
+.coach-decision-card-header span {
+  color: var(--coach-muted);
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.coach-decision-card strong {
+  display: block;
+
+  color: var(--coach-text);
+
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.coach-decision-card p {
+  margin: 4px 0 0;
+
+  color: var(--coach-muted);
+
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+/* =========================================================
+   ACTION PLAN
+   Supports both current and previous class names
+   ========================================================= */
+
+.action-plan-panel,
+.coach-action-plan {
+  margin-top: 10px;
+
+  padding: 15px;
+
+  border: 1px solid var(--coach-border);
+  border-radius: var(--coach-radius);
+
+  background: var(--coach-panel);
+}
+
+.action-plan-header,
+.coach-action-plan-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-bottom: 12px;
+}
+
+.action-plan-header > div:first-child {
+  min-width: 0;
+}
+
+.action-plan-header span:first-child {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: var(--coach-gold);
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.action-plan-header h4 {
+  margin: 0;
+
+  color: var(--coach-text);
+
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.action-plan-badge,
+.coach-action-count {
+  flex-shrink: 0;
+
+  padding: 4px 8px;
+
+  border: 1px solid #3a414c;
+  border-radius: 999px;
+
+  background: #242830;
+
+  color: var(--coach-text-2);
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   ACTION LIST
+   ========================================================= */
+
+.action-plan-list,
+.coach-action-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.action-plan-step,
+.coach-action-item {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 10px;
+
+  padding: 10px 11px;
+
+  border: 1px solid #303640;
+  border-radius: 8px;
+
+  background: #20242a;
+
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease;
+}
+
+.action-plan-step:hover,
+.coach-action-item:hover {
+  border-color: #414854;
+  background: #242830;
+}
+
+.action-plan-step.danger {
+  border-color: rgba(226, 107, 107, 0.34);
+  background: var(--coach-red-soft);
+}
+
+.action-plan-step.warning {
+  border-color: rgba(217, 173, 85, 0.34);
+  background: var(--coach-gold-soft);
+}
+
+.action-plan-step.positive {
+  border-color: rgba(89, 199, 138, 0.30);
+  background: var(--coach-green-soft);
+}
+
+.action-plan-number,
+.coach-action-number {
+  width: 23px;
+  height: 23px;
+
+  flex: 0 0 23px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 6px;
+
+  background: #303640;
+
+  color: #e7eaf0;
+
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.action-plan-step.danger .action-plan-number {
+  background: rgba(226, 107, 107, 0.20);
+  color: #f2a3a3;
+}
+
+.action-plan-step.warning .action-plan-number {
+  background: rgba(217, 173, 85, 0.20);
+  color: #e5c477;
+}
+
+.action-plan-step.positive .action-plan-number {
+  background: rgba(89, 199, 138, 0.18);
+  color: #8ed8ad;
+}
+
+.action-plan-step-main,
+.coach-action-content {
+  min-width: 0;
+}
+
+.action-plan-step-top {
+  display: flex;
+  align-items: baseline;
+
+  gap: 7px;
+
+  min-width: 0;
+}
+
+.action-plan-step-top span {
+  flex-shrink: 0;
+
+  color: var(--coach-dim);
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+}
+
+.action-plan-step-top strong {
+  color: var(--coach-text);
+
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.action-plan-step-main p,
+.coach-action-content p {
+  margin: 3px 0 0;
+
+  color: var(--coach-muted);
+
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+/* =========================================================
+   UPGRADE TARGETS
+   ========================================================= */
+
+.upgrade-targets,
+.coach-targets {
+  margin-top: 10px;
+
+  padding: 11px 12px;
+
+  border: 1px solid var(--coach-border);
+  border-radius: 8px;
+
+  background: #191c21;
+}
+
+.upgrade-target-title,
+.coach-targets-header {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  margin-bottom: 8px;
+
+  color: var(--coach-text-2);
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.upgrade-target-title svg,
+.coach-targets-header svg {
+  width: 13px;
+  height: 13px;
+
+  color: var(--coach-gold);
+}
+
+.upgrade-target-list {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 6px;
+}
+
+.upgrade-target-list span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  padding: 5px 8px;
+
+  border: 1px solid #343b46;
+  border-radius: 6px;
+
+  background: #22262d;
+
+  color: var(--coach-text-2);
+
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.upgrade-target-list strong {
+  color: var(--coach-gold);
+}
+
+/* =========================================================
+   REASONS
+   ========================================================= */
+
+.coach-reasons {
+  margin-top: 10px;
+
+  padding: 12px;
+
+  border: 1px solid var(--coach-border);
+  border-radius: var(--coach-radius);
+
+  background: var(--coach-panel);
+}
+
+.coach-reasons-header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-bottom: 8px;
+}
+
+.coach-reasons-header svg {
+  width: 13px;
+  height: 13px;
+
+  color: var(--coach-gold);
+}
+
+.coach-reasons-header strong {
+  color: var(--coach-text-2);
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.coach-reason-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.coach-reason {
+  position: relative;
+
+  padding-left: 12px;
+
+  color: var(--coach-muted);
+
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.coach-reason::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 6px;
+
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  background: #697381;
+}
+
+/* =========================================================
+   WARNINGS
+   ========================================================= */
+
+.coach-warnings {
+  margin-top: 10px;
+
+  padding: 11px 12px;
+
+  border: 1px solid rgba(226, 107, 107, 0.34);
+  border-radius: var(--coach-radius);
+
+  background: var(--coach-red-soft);
+}
+
+.coach-warnings-header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-bottom: 7px;
+}
+
+.coach-warnings-header svg {
+  width: 14px;
+  height: 14px;
+
+  color: var(--coach-red);
+}
+
+.coach-warnings-header strong {
+  color: #e9a0a0;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 0.04em;
+}
+
+.coach-warning-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.coach-warning {
+  color: #c99191;
+
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+/* =========================================================
+   ITEM TARGET
+   ========================================================= */
+
+.coach-item-target {
+  margin-top: 10px;
+
+  padding: 12px;
+
+  border: 1px solid var(--coach-border);
+  border-radius: var(--coach-radius);
+
+  background: var(--coach-panel);
+}
+
+.coach-item-target-header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-bottom: 9px;
+}
+
+.coach-item-target-header svg {
+  width: 13px;
+  height: 13px;
+
+  color: var(--coach-gold);
+}
+
+.coach-item-target-header strong {
+  color: var(--coach-text-2);
+
+  font-size: 10px;
+}
+
+.coach-item-target-row {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 8px;
+
+  border: 1px solid #2d333c;
+  border-radius: 7px;
+
+  background: #191c21;
+}
+
+.coach-item-target-row + .coach-item-target-row {
+  margin-top: 6px;
+}
+
+.coach-item-target-champion {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  min-width: 120px;
+}
+
+.coach-item-target-champion img {
+  width: 28px;
+  height: 28px;
+
+  border-radius: 6px;
+
+  object-fit: cover;
+}
+
+.coach-item-target-champion strong {
+  color: var(--coach-text-2);
+
+  font-size: 10px;
+}
+
+.coach-item-target-items {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 5px;
+}
+
+.coach-item-target-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  padding: 4px 6px;
+
+  border: 1px solid #343a44;
+  border-radius: 6px;
+
+  background: #22262c;
+
+  color: var(--coach-muted);
+
+  font-size: 9px;
+}
+
+.coach-item-target-chip img {
+  width: 17px;
+  height: 17px;
+
+  border-radius: 3px;
+
+  object-fit: cover;
+}
+
+/* =========================================================
+   TRAIT TARGET
+   ========================================================= */
+
+.coach-trait-target {
+  margin-top: 10px;
+
+  padding: 12px;
+
+  border: 1px solid var(--coach-border);
+  border-radius: var(--coach-radius);
+
+  background: var(--coach-panel);
+}
+
+.coach-trait-target-header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-bottom: 8px;
+}
+
+.coach-trait-target-header svg {
+  width: 13px;
+  height: 13px;
+
+  color: var(--coach-gold);
+}
+
+.coach-trait-target-header strong {
+  color: var(--coach-text-2);
+
+  font-size: 10px;
+}
+
+.coach-trait-target-list {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 6px;
+}
+
+.coach-trait-target-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  padding: 5px 7px;
+
+  border: 1px solid #343a44;
+  border-radius: 6px;
+
+  background: #20242a;
+
+  color: var(--coach-muted);
+
+  font-size: 9px;
+}
+
+.coach-trait-target-chip strong {
+  color: var(--coach-text-2);
+}
+
+/* =========================================================
+   ENGINE FOOTER
+   ========================================================= */
+
+.coach-action-plan-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-top: 10px;
+  padding-top: 10px;
+
+  border-top: 1px solid #2b3038;
+}
+
+.coach-engine-note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  color: var(--coach-dim);
+
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+.coach-engine-note svg {
+  width: 12px;
+  height: 12px;
+
+  flex: 0 0 auto;
+}
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.coach-engine-empty {
+  margin-top: 10px;
+
+  padding: 24px 18px;
+
+  border: 1px dashed #3a414c;
+  border-radius: var(--coach-radius);
+
+  background: #191c21;
+
+  text-align: center;
+}
+
+.coach-engine-empty svg {
+  width: 22px;
+  height: 22px;
+
+  margin-bottom: 8px;
+
+  color: var(--coach-dim);
+}
+
+.coach-engine-empty strong {
+  display: block;
+
+  color: var(--coach-text-2);
+
+  font-size: 11px;
+}
+
+.coach-engine-empty p {
+  max-width: 430px;
+
+  margin: 5px auto 0;
+
+  color: var(--coach-muted);
+
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   REMOVE UNWANTED MOTION
+   ========================================================= */
+
+.coach-decision-engine *,
+.action-plan-panel * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .coach-decision-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .coach-decision-engine-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .coach-primary-decision {
+    align-items: flex-start;
+  }
+
+  .action-plan-step-top {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .coach-item-target-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .coach-item-target-champion {
+    min-width: 0;
+  }
+}
+
+/* =========================================================
+   TFT COACH — MATCH COACH VISUAL FIX
+   Economy + Trait + Decision Analysis
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   FONT / BASE
+   --------------------------------------------------------- */
+
+.coach-page,
+.coach-page * {
+  font-family:
+    Inter,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+
+.coach-page {
+  color: #eef0f3;
+}
+
+.coach-page p {
+  line-height: 1.55;
+}
+
+/* ---------------------------------------------------------
+   SELECTED TITLE
+   --------------------------------------------------------- */
+
+.coach-page .selected-title {
+  color: #e7e9ed;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* ---------------------------------------------------------
+   TỘC / HỆ
+   --------------------------------------------------------- */
+
+.coach-page .trait-panel {
+  margin-top: 18px;
+  padding: 16px;
+
+  border: 1px solid #30343d;
+  border-radius: 11px;
+
+  background: #191c22;
+}
+
+.coach-page .trait-panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.coach-page .trait-panel-header p {
+  margin: 5px 0 0;
+
+  color: #8f97a5;
+
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.coach-page .trait-count-badge {
+  flex-shrink: 0;
+
+  padding: 5px 9px;
+
+  border: 1px solid #554528;
+  border-radius: 6px;
+
+  background: rgba(205, 164, 83, 0.08);
+
+  color: #d9b76b;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.coach-page .trait-empty {
+  padding: 16px;
+
+  border: 1px dashed #353a44;
+  border-radius: 8px;
+
+  background: #171a1f;
+
+  color: #858d9a;
+
+  font-size: 11px;
+  text-align: center;
+}
+
+.coach-page .trait-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.coach-page .trait-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 14px;
+
+  min-height: 50px;
+
+  padding: 9px 11px;
+
+  border: 1px solid #2e333c;
+  border-radius: 8px;
+
+  background: #1d2026;
+
+  transition:
+    border-color 120ms ease,
+    background-color 120ms ease;
+}
+
+.coach-page .trait-row:hover {
+  border-color: #414751;
+  background: #20242b;
+}
+
+.coach-page .trait-row.active {
+  border-color: #51452e;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(205, 164, 83, 0.09),
+      rgba(205, 164, 83, 0.025)
+    );
+}
+
+.coach-page .trait-row.inactive {
+  opacity: 0.72;
+}
+
+.coach-page .trait-main {
+  min-width: 0;
+}
+
+.coach-page .trait-name {
+  overflow: hidden;
+
+  color: #e3e6eb;
+
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.35;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.coach-page .trait-row.active .trait-name {
+  color: #e2bd70;
+}
+
+.coach-page .trait-progress {
+  display: flex;
+  align-items: center;
+
+  gap: 4px;
+
+  margin-top: 4px;
+
+  color: #858d99;
+
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+.coach-page .trait-current {
+  color: #d5d9df;
+  font-weight: 800;
+}
+
+.coach-page .trait-maxed {
+  margin-left: 5px;
+
+  color: #a88a50;
+}
+
+.coach-page .trait-breakpoints {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
+  flex-shrink: 0;
+}
+
+.coach-page .trait-breakpoints span {
+  width: 21px;
+  height: 21px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #3a404a;
+  border-radius: 50%;
+
+  background: #181b20;
+
+  color: #747d89;
+
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.coach-page .trait-breakpoints span.reached {
+  border-color: #806333;
+
+  background: rgba(205, 164, 83, 0.13);
+
+  color: #e0bb6a;
+}
+
+.coach-page .trait-breakpoints .unique-trait {
+  width: auto;
+
+  padding: 0 7px;
+
+  border-radius: 5px;
+
+  color: #89919d;
+}
+
+/* ---------------------------------------------------------
+   ECONOMY & TEMPO
+   --------------------------------------------------------- */
+
+.coach-page .economy-panel {
+  margin-top: 18px;
+  padding: 16px;
+
+  border: 1px solid #30343d;
+  border-radius: 11px;
+
+  background: #191c22;
+}
+
+.coach-page .economy-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 14px;
+}
+
+.coach-page .economy-header > div:first-child > span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #d2aa59;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 0.13em;
+}
+
+.coach-page .economy-header h3 {
+  margin: 0;
+
+  color: #f0f2f5;
+
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.coach-page .economy-risk {
+  flex-shrink: 0;
+
+  padding: 5px 9px;
+
+  border: 1px solid #39404a;
+  border-radius: 999px;
+
+  background: #20242b;
+
+  color: #b8bec8;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.coach-page .economy-risk.stable {
+  border-color: rgba(89, 199, 138, 0.30);
+  background: rgba(89, 199, 138, 0.07);
+  color: #8fd2aa;
+}
+
+.coach-page .economy-risk.warning {
+  border-color: rgba(217, 173, 85, 0.35);
+  background: rgba(217, 173, 85, 0.08);
+  color: #dfbd72;
+}
+
+.coach-page .economy-risk.danger,
+.coach-page .economy-risk.critical {
+  border-color: rgba(226, 107, 107, 0.35);
+  background: rgba(226, 107, 107, 0.08);
+  color: #e79a9a;
+}
+
+/* ---------------------------------------------------------
+   ECONOMY METRICS
+   --------------------------------------------------------- */
+
+.coach-page .economy-metrics {
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 8px;
+
+  margin-bottom: 9px;
+}
+
+.coach-page .economy-metric {
+  min-width: 0;
+
+  min-height: 91px;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 11px 12px;
+
+  border: 1px solid #30353e;
+  border-radius: 8px;
+
+  background: #1e2229;
+}
+
+.coach-page .economy-metric > svg {
+  width: 15px;
+  height: 15px;
+
+  margin-bottom: 8px;
+
+  color: #cda453;
+}
+
+.coach-page .economy-metric > span {
+  color: #89919d;
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.coach-page .economy-metric > strong {
+  margin-top: 2px;
+
+  color: #f1f3f6;
+
+  font-size: 20px;
+  font-weight: 750;
+  line-height: 1.2;
+}
+
+.coach-page .economy-metric > small {
+  display: block;
+
+  margin-top: 4px;
+
+  overflow: hidden;
+
+  color: #8d95a2;
+
+  font-size: 9px;
+  line-height: 1.35;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------
+   ECONOMY PLAN
+   --------------------------------------------------------- */
+
+.coach-page .economy-plan {
+  display: grid;
+
+  grid-template-columns: 1.2fr 1fr;
+
+  gap: 8px;
+}
+
+.coach-page .economy-plan-main,
+.coach-page .economy-plan-level {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 10px;
+
+  min-height: 76px;
+
+  padding: 12px;
+
+  border: 1px solid #30353e;
+  border-radius: 8px;
+
+  background: #1d2026;
+}
+
+.coach-page .economy-plan-main > svg,
+.coach-page .economy-plan-level > svg {
+  flex-shrink: 0;
+
+  margin-top: 2px;
+
+  color: #cda453;
+}
+
+.coach-page .economy-plan strong {
+  display: block;
+
+  color: #e9ecf0;
+
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.coach-page .economy-plan p {
+  margin: 5px 0 0;
+
+  color: #929aa7;
+
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+/* ---------------------------------------------------------
+   INTEREST / WARNING
+   --------------------------------------------------------- */
+
+.coach-page .economy-interest {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  margin-top: 8px;
+  padding: 10px 11px;
+
+  border: 1px solid #3c3526;
+  border-radius: 7px;
+
+  background: rgba(205, 164, 83, 0.055);
+
+  color: #9da4ae;
+
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.coach-page .economy-interest svg {
+  flex-shrink: 0;
+  color: #cda453;
+}
+
+.coach-page .economy-interest strong {
+  color: #daba72;
+}
+
+.coach-page .economy-warning {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  margin-top: 8px;
+  padding: 10px 11px;
+
+  border: 1px solid rgba(226, 107, 107, 0.28);
+  border-radius: 7px;
+
+  background: rgba(226, 107, 107, 0.055);
+
+  color: #c99595;
+
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.coach-page .economy-warning svg {
+  flex-shrink: 0;
+  color: #e27a7a;
+}
+
+/* ---------------------------------------------------------
+   CURRENT CONTEXT
+   --------------------------------------------------------- */
+
+.coach-page .context-summary {
+  margin-top: 12px;
+
+  padding: 12px 14px;
+
+  border: 1px solid #30343d;
+  border-radius: 9px;
+
+  background: #181b20;
+}
+
+.coach-page .context-summary-title {
+  margin-bottom: 9px;
+
+  color: #8d95a1;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.coach-page .context-summary-grid {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 7px;
+}
+
+.coach-page .context-summary-grid span {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 4px;
+
+  padding: 5px 8px;
+
+  border: 1px solid #30353e;
+  border-radius: 6px;
+
+  background: #20242a;
+
+  color: #858e9b;
+
+  font-size: 10px;
+}
+
+.coach-page .context-summary-grid strong {
+  color: #dfe3e8;
+  font-weight: 700;
+}
+
+/* ---------------------------------------------------------
+   ANALYSIS / DECISION AREA
+   Remove bright white surfaces
+   --------------------------------------------------------- */
+
+.coach-page .analysis-panel,
+.coach-page .analysis-empty,
+.coach-page .decision-analysis,
+.coach-page .decision-reason-panel,
+.coach-page .decision-reasons-panel,
+.coach-page .decision-warning-panel,
+.coach-page .decision-context-panel {
+  background: #191c22 !important;
+
+  color: #e9ecf0 !important;
+
+  border-color: #30353e !important;
+}
+
+.coach-page .analysis-panel {
+  border: 1px solid #30343d !important;
+  border-radius: 11px !important;
+}
+
+.coach-page .analysis-empty {
+  color: #aab1bc !important;
+}
+
+.coach-page .analysis-empty h3,
+.coach-page .analysis-empty strong {
+  color: #eef0f3 !important;
+}
+
+.coach-page .analysis-empty p {
+  color: #9199a6 !important;
+
+  font-size: 12px !important;
+  line-height: 1.55 !important;
+}
+
+/* Any generic white analysis cards */
+.coach-page .decision-card,
+.coach-page .decision-reason,
+.coach-page .decision-warning,
+.coach-page .decision-context,
+.coach-page .reason-panel,
+.coach-page .warning-panel {
+  background: #1e2229 !important;
+
+  border-color: #30353e !important;
+
+  color: #e8ebef !important;
+}
+
+.coach-page .decision-card p,
+.coach-page .decision-reason p,
+.coach-page .decision-warning p,
+.coach-page .decision-context p,
+.coach-page .reason-panel p,
+.coach-page .warning-panel p {
+  color: #9aa2ae !important;
+
+  font-size: 11px !important;
+  line-height: 1.55 !important;
+}
+
+/* ---------------------------------------------------------
+   DECISION ENGINE TYPOGRAPHY
+   --------------------------------------------------------- */
+
+.coach-page .coach-decision-engine {
+  color: #edf0f4;
+}
+
+.coach-page .coach-decision-engine p {
+  color: #929aa7;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.coach-page .coach-decision-engine strong {
+  color: #eef0f3;
+}
+
+.coach-page .coach-decision-engine span {
+  line-height: 1.35;
+}
+
+/* ---------------------------------------------------------
+   DECISION CARDS — DARK ONLY
+   --------------------------------------------------------- */
+
+.coach-page .coach-primary-decision,
+.coach-page .coach-decision-card,
+.coach-page .coach-action-plan,
+.coach-page .action-plan-panel,
+.coach-page .coach-reasons,
+.coach-page .coach-warnings,
+.coach-page .coach-item-target,
+.coach-page .coach-trait-target {
+  background: #1d2128 !important;
+
+  border-color: #303640 !important;
+
+  color: #e9ecf0 !important;
+}
+
+.coach-page .coach-primary-decision.positive {
+  background: #1c2521 !important;
+
+  border-color: rgba(89, 199, 138, 0.30) !important;
+}
+
+.coach-page .coach-primary-decision.warning {
+  background: #252219 !important;
+
+  border-color: rgba(217, 173, 85, 0.32) !important;
+}
+
+.coach-page .coach-primary-decision.danger {
+  background: #261e21 !important;
+
+  border-color: rgba(226, 107, 107, 0.32) !important;
+}
+
+.coach-page .coach-decision-card p,
+.coach-page .coach-primary-content > p,
+.coach-page .action-plan-step-main p,
+.coach-page .coach-reason,
+.coach-page .coach-warning {
+  color: #98a0ad !important;
+
+  font-size: 11px !important;
+  line-height: 1.55 !important;
+}
+
+/* ---------------------------------------------------------
+   NO WHITE BACKGROUND ANYWHERE IN COACH ANALYSIS
+   --------------------------------------------------------- */
+
+.coach-page .coach-decision-engine [style*="background"],
+.coach-page .action-plan-panel [style*="background"] {
+  color: inherit;
+}
+
+/* ---------------------------------------------------------
+   ANALYSIS FOOTER
+   --------------------------------------------------------- */
+
+.coach-page .coach-engine-note {
+  color: #737c89;
+
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+/* ---------------------------------------------------------
+   RESPONSIVE
+   --------------------------------------------------------- */
+
+@media (max-width: 950px) {
+  .coach-page .economy-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .coach-page .economy-plan {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .coach-page .economy-metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .coach-page .trait-panel,
+  .coach-page .economy-panel {
+    padding: 13px;
+  }
+
+  .coach-page .trait-row {
+    align-items: flex-start;
+  }
+
+  .coach-page .trait-breakpoints {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    max-width: 100px;
+  }
+}
+
+/* =========================================================
+   SHOP INTELLIGENCE
+   ========================================================= */
+
+.shop-intelligence {
+  margin-top: 14px;
+
+  padding: 15px;
+
+  border: 1px solid #30353e;
+  border-radius: 11px;
+
+  background: #191c22;
+}
+
+.shop-intelligence-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 13px;
+}
+
+.shop-intelligence-header span {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #d2aa59;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 0.13em;
+}
+
+.shop-intelligence-header h3 {
+  margin: 0;
+
+  color: #eef0f3;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.shop-intelligence-header p {
+  margin: 4px 0 0;
+
+  color: #8e96a3;
+
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.shop-clear-button {
+  padding: 6px 9px;
+
+  border: 1px solid #373d47;
+  border-radius: 6px;
+
+  background: #20242a;
+
+  color: #969eaa;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.shop-clear-button:hover {
+  border-color: #555d68;
+  color: #e2e5e9;
+}
+
+/* ---------------------------------------------------------
+   SHOP SLOTS
+   --------------------------------------------------------- */
+
+.shop-slots {
+  display: grid;
+
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+
+  gap: 7px;
+}
+
+.shop-slot {
+  position: relative;
+
+  min-height: 105px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px;
+
+  border: 1px solid #303640;
+  border-radius: 8px;
+
+  background: #1d2128;
+
+  text-align: center;
+}
+
+.shop-slot.empty {
+  border-style: dashed;
+
+  background: #181b20;
+}
+
+.shop-champion-image-wrap {
+  position: relative;
+
+  width: 42px;
+  height: 42px;
+
+  margin-bottom: 6px;
+}
+
+.shop-champion-image {
+  width: 42px;
+  height: 42px;
+
+  display: block;
+
+  border: 1px solid #4a515d;
+  border-radius: 7px;
+
+  object-fit: cover;
+}
+
+.shop-slot > strong {
+  max-width: 100%;
+
+  overflow: hidden;
+
+  color: #e6e9ed;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shop-champion-cost {
+  margin-top: 2px;
+
+  color: #858e9a;
+
+  font-size: 8px;
+}
+
+.shop-add-button {
+  width: 100%;
+  height: 100%;
+
+  min-height: 88px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #7e8793;
+
+  cursor: pointer;
+}
+
+.shop-add-button svg {
+  color: #b18d4c;
+}
+
+.shop-add-button span {
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.shop-add-button:hover {
+  color: #d2d6dc;
+}
+
+.shop-remove {
+  position: absolute;
+
+  top: 5px;
+  right: 5px;
+
+  width: 18px;
+  height: 18px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid #3a404a;
+  border-radius: 5px;
+
+  background: #181b20;
+
+  color: #858d98;
+
+  cursor: pointer;
+}
+
+.shop-remove:hover {
+  color: #e07d7d;
+  border-color: rgba(226, 107, 107, 0.35);
+}
+
+/* ---------------------------------------------------------
+   ACTION BADGE
+   --------------------------------------------------------- */
+
+.shop-action-badge {
+  position: absolute;
+
+  right: -8px;
+  bottom: -5px;
+
+  padding: 2px 5px;
+
+  border: 1px solid #3a414b;
+  border-radius: 4px;
+
+  background: #242830;
+
+  color: #9ca4b0;
+
+  font-size: 7px;
+  font-weight: 800;
+
+  letter-spacing: 0.03em;
+}
+
+.shop-action-badge.positive {
+  border-color: rgba(89, 199, 138, 0.35);
+
+  background: #1d2923;
+
+  color: #86cfa4;
+}
+
+.shop-action-badge.warning {
+  border-color: rgba(217, 173, 85, 0.35);
+
+  background: #292419;
+
+  color: #d8b86f;
+}
+
+/* ---------------------------------------------------------
+   ROLL PLAN
+   --------------------------------------------------------- */
+
+.shop-roll-plan {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  margin-top: 9px;
+  padding: 11px 12px;
+
+  border: 1px solid #303640;
+  border-radius: 8px;
+
+  background: #1e2229;
+}
+
+.shop-roll-plan.positive {
+  border-color: rgba(89, 199, 138, 0.27);
+  background: #1c2420;
+}
+
+.shop-roll-plan.warning {
+  border-color: rgba(217, 173, 85, 0.28);
+  background: #242119;
+}
+
+.shop-roll-plan.danger {
+  border-color: rgba(226, 107, 107, 0.30);
+  background: #251e21;
+}
+
+.shop-roll-icon {
+  width: 30px;
+  height: 30px;
+
+  flex: 0 0 30px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid #3a414b;
+  border-radius: 7px;
+
+  color: #cda453;
+}
+
+.shop-roll-content {
+  min-width: 0;
+}
+
+.shop-roll-content > span {
+  display: block;
+
+  color: #858e9a;
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: 0.10em;
+}
+
+.shop-roll-content > strong {
+  display: block;
+
+  margin-top: 2px;
+
+  color: #e9ecf0;
+
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.shop-roll-content > p {
+  margin: 3px 0 0;
+
+  color: #8f98a5;
+
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.shop-roll-range {
+  flex-shrink: 0;
+
+  margin-left: auto;
+
+  padding: 5px 8px;
+
+  border: 1px solid #383f49;
+  border-radius: 6px;
+
+  background: #181b20;
+
+  color: #c6cbd2;
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+/* ---------------------------------------------------------
+   SHOP ANALYSIS
+   --------------------------------------------------------- */
+
+.shop-analysis-list {
+  margin-top: 10px;
+
+  border: 1px solid #303640;
+  border-radius: 8px;
+
+  background: #1c2026;
+
+  overflow: hidden;
+}
+
+.shop-analysis-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 9px 11px;
+
+  border-bottom: 1px solid #2e343d;
+
+  color: #b8bec8;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.shop-analysis-title svg {
+  color: #cda453;
+}
+
+.shop-analysis-row {
+  display: grid;
+
+  grid-template-columns: 110px 1fr 35px;
+
+  gap: 10px;
+
+  align-items: center;
+
+  min-height: 52px;
+
+  padding: 8px 11px;
+
+  border-bottom: 1px solid #292f37;
+}
+
+.shop-analysis-row:last-child {
+  border-bottom: 0;
+}
+
+.shop-analysis-row.positive {
+  background: rgba(89, 199, 138, 0.035);
+}
+
+.shop-analysis-row.warning {
+  background: rgba(217, 173, 85, 0.035);
+}
+
+.shop-analysis-main {
+  min-width: 0;
+}
+
+.shop-analysis-main strong {
+  display: block;
+
+  overflow: hidden;
+
+  color: #e5e8ed;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shop-analysis-main span {
+  display: block;
+
+  margin-top: 2px;
+
+  color: #7f8895;
+
+  font-size: 8px;
+}
+
+.shop-analysis-reasons {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 4px;
+}
+
+.shop-analysis-reasons span {
+  padding: 3px 5px;
+
+  border: 1px solid #343a44;
+  border-radius: 4px;
+
+  background: #20242a;
+
+  color: #8e97a3;
+
+  font-size: 8px;
+}
+
+.shop-analysis-score {
+  color: #cda453;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  text-align: right;
+}
+
+/* ---------------------------------------------------------
+   TARGETS
+   --------------------------------------------------------- */
+
+.shop-targets {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  margin-top: 9px;
+  padding: 9px 11px;
+
+  border: 1px solid #303640;
+  border-radius: 7px;
+
+  background: #181b20;
+}
+
+.shop-targets > span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  flex-shrink: 0;
+
+  color: #8b94a0;
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.shop-targets > span svg {
+  color: #cda453;
+}
+
+.shop-targets > div {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 5px;
+}
+
+.shop-targets strong {
+  padding: 4px 6px;
+
+  border: 1px solid #3a404a;
+  border-radius: 5px;
+
+  background: #21252b;
+
+  color: #c9ced5;
+
+  font-size: 8px;
+}
+
+/* ---------------------------------------------------------
+   RESPONSIVE
+   --------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .shop-slots {
+    grid-template-columns: repeat(5, minmax(65px, 1fr));
+  }
+
+  .shop-analysis-row {
+    grid-template-columns: 90px 1fr;
+  }
+
+  .shop-analysis-score {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .shop-slots {
+    grid-template-columns: repeat(5, minmax(55px, 1fr));
+    gap: 4px;
+  }
+
+  .shop-slot {
+    min-height: 90px;
+    padding: 5px;
+  }
+
+  .shop-champion-image-wrap,
+  .shop-champion-image {
+    width: 36px;
+    height: 36px;
+  }
+
+  .shop-roll-plan {
+    align-items: flex-start;
+  }
+
+  .shop-roll-range {
+    display: none;
+  }
+}

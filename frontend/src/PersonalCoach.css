@@ -1,0 +1,34 @@
+
+.personal-coach-panel {
+  margin-top: 24px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(20,24,34,.98), rgba(14,17,25,.98));
+  color: #f4f7fb;
+  overflow: hidden;
+}
+.personal-coach-header { display:flex; justify-content:space-between; gap:16px; padding:20px 22px; border-bottom:1px solid rgba(255,255,255,.07); }
+.personal-coach-header span { font-size:11px; letter-spacing:.12em; opacity:.6; }
+.personal-coach-header h3 { margin:5px 0 0; font-size:20px; }
+.personal-coach-status { font-size:12px; padding:7px 10px; border-radius:999px; background:rgba(255,255,255,.06); white-space:nowrap; }
+.personal-coach-status.online { background:rgba(72,190,124,.12); color:#79d9a5; }
+.personal-coach-status.offline { background:rgba(255,184,77,.12); color:#ffc66d; }
+.personal-coach-body { padding:18px 22px 22px; }
+.personal-coach-actions { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
+.personal-coach-actions button { border:1px solid rgba(255,255,255,.09); background:rgba(255,255,255,.05); color:inherit; padding:9px 12px; border-radius:9px; cursor:pointer; }
+.personal-coach-actions button.primary { background:#f4f7fb; color:#11151d; }
+.personal-coach-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+.personal-coach-metric { padding:13px; border-radius:12px; background:rgba(255,255,255,.045); }
+.personal-coach-metric span { display:block; font-size:11px; opacity:.58; }
+.personal-coach-metric strong { display:block; margin-top:5px; font-size:20px; }
+.personal-coach-section { margin-top:18px; }
+.personal-coach-section h4 { margin:0 0 10px; font-size:14px; }
+.personal-coach-list { display:grid; gap:8px; }
+.personal-coach-item { padding:12px 13px; border-radius:11px; background:rgba(255,255,255,.04); }
+.personal-coach-item strong { display:block; font-size:13px; }
+.personal-coach-item p { margin:5px 0 0; font-size:12px; line-height:1.5; opacity:.72; }
+.personal-coach-advice { padding:15px; border-radius:12px; background:rgba(120,150,255,.08); border:1px solid rgba(120,150,255,.16); }
+.personal-coach-advice p { margin:6px 0 0; line-height:1.55; font-size:13px; }
+.personal-coach-empty { padding:18px; border-radius:12px; background:rgba(255,255,255,.035); opacity:.65; font-size:13px; }
+@media(max-width:900px){ .personal-coach-grid{grid-template-columns:repeat(2,minmax(0,1fr));} }
+@media(max-width:560px){ .personal-coach-header{flex-direction:column;} .personal-coach-grid{grid-template-columns:1fr 1fr;} .personal-coach-body{padding:14px;} }
